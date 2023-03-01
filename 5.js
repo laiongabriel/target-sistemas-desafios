@@ -7,11 +7,10 @@
 const text = "javascript é legal";
 
 function inverterString(text) {
-   arrayText = [];
+   let invertedText = "";
    for (let i = text.length - 1; i >= 0; i--) {
-      arrayText.push(text[i]);
+      invertedText += text[i];
    }
-   const invertedText = arrayText.toString().replaceAll(",", "");
    console.log(invertedText);
 }
 

@@ -14,13 +14,21 @@ const listaDeValores = jsonData
 const valorMenor = Math.min(...listaDeValores);
 const valorMaior = Math.max(...listaDeValores);
 
-console.log(`Menor valor de faturamento: ${valorMenor}`);
-console.log(`Maior valor de faturamento: ${valorMaior}`);
+function formatarMoeda(valor) {
+   return valor.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+   });
+}
+
+console.log(`Menor valor de faturamento: ${formatarMoeda(valorMenor)}`);
+console.log(`Maior valor de faturamento: ${formatarMoeda(valorMaior)}`);
 
 const somaTotal = listaDeValores.reduce(
    (acc, valorAtual) => acc + valorAtual,
    0
 );
+
 const mediaMensal = somaTotal / listaDeValores.length;
 
 const diasAcimaDaMedia = listaDeValores.filter(

@@ -23,5 +23,5 @@ for (let item in valores) {
 
 for (let item in valores) {
    let percentual = valores[item] / somaDosValores;
-   console.log(`O percentual de ${item} foi de ${(percentual * 100).toFixed(2)}%`);
+   console.log(`O percentual de ${item} foi de ${(percentual * 100).toFixed()}%`);
 }

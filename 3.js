@@ -7,44 +7,28 @@ const fs = require("fs");
 
 const jsonData = JSON.parse(fs.readFileSync("dados.json"));
 
-// Calcula o menor e o maior valor de faturamento ocorrido em um dia do mês
-let menorValor = Infinity;
-let maiorValor = -Infinity;
-
+const listaDeValores = [];
 jsonData.forEach((item) => {
-   if (item.valor < menorValor && item.valor !== 0) {
-      menorValor = item.valor;
-   }
-   if (item.valor > maiorValor) {
-      maiorValor = item.valor;
-   }
+   if (item.valor !== 0) listaDeValores.push(item.valor);
 });
 
-console.log(`Menor valor de faturamento: ${menorValor}`);
-console.log(`Maior valor de faturamento: ${maiorValor}`);
+const valorMenor = Math.min(...listaDeValores);
+const valorMaior = Math.max(...listaDeValores);
 
-// Calcula a média mensal de faturamento, ignorando os dias sem faturamento
-let soma = 0;
-let quantidade = 0;
+console.log(`Menor valor de faturamento: ${valorMenor}`);
+console.log(`Maior valor de faturamento: ${valorMaior}`);
 
-jsonData.forEach((item) => {
-   if (item.valor !== 0) {
-      soma += item.valor;
-      quantidade++;
-   }
-});
+const somaTotal = listaDeValores.reduce(
+   (acc, valorAtual) => acc + valorAtual,
+   0
+);
+const mediaMensal = somaTotal / listaDeValores.length;
 
-const mediaMensal = soma / quantidade;
-
-// Calcula o número de dias no mês em que o valor de faturamento diário foi superior à média mensal
 let diasAcimaDaMedia = 0;
-
-jsonData.forEach((item) => {
-   if (item.valor > mediaMensal) {
+listaDeValores.forEach((item) => {
+   if (item > mediaMensal) {
       diasAcimaDaMedia++;
    }
 });
 
-console.log(
-   `Número de dias em que o faturamento diário foi superior à média mensal: ${diasAcimaDaMedia}`
-);
+console.log(`Dias acima da média: ${diasAcimaDaMedia}`);
